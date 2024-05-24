@@ -13,5 +13,5 @@ func main() {
 	}
 	if len(os.Args[1:]) <= 2 {
 		programs.AsciiArtFs()
-	}dfdj
+	}
 }

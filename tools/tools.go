@@ -3,7 +3,6 @@ package tools
 import (
 	"log"
 	"os"
-	"strings"
 )
 
 func Read_Input(infile_name string) string {
@@ -28,11 +27,11 @@ func RemoveEmptyString(slice []string) []string {
 func CHeckTemplate() string {
 	ReplaceArgs()
 	var data string
-	if strings.HasSuffix(os.Args[2], "standard") || strings.HasSuffix(os.Args[2], "standard.txt") {
+	if os.Args[2] == "standard" {
 		data = Read_Input("Templates/standard.txt")
-	} else if strings.HasSuffix(os.Args[2], "shadow") || strings.HasSuffix(os.Args[2], "shadow.txt") {
+	} else if os.Args[2] == "shadow" {
 		data = Read_Input("Templates/shadow.txt")
-	} else if strings.HasSuffix(os.Args[2], "thinkertoy") || strings.HasSuffix(os.Args[2], "thinkertoy.txt") {
+	} else if os.Args[2] == "thinkertoy" {
 		data = Read_Input("Templates/thinkertoy.txt")
 	} else {
 		log.Fatalln("Usage: go run . [STRING] [BANNER]\nEX: go run . something standard")
@@ -40,13 +39,13 @@ func CHeckTemplate() string {
 	return data
 }
 
-func ReplaceArgs() (string,string) {
-	if strings.HasSuffix(os.Args[1], "standard") || strings.HasSuffix(os.Args[1], "standard.txt") || strings.HasSuffix(os.Args[1], "shadow") || strings.HasSuffix(os.Args[1], "shadow.txt") || strings.HasSuffix(os.Args[1], "thinkertoy") || strings.HasSuffix(os.Args[1], "thinkertoy.txt") {
-		os.Args[1],os.Args[2] = os.Args[2],os.Args[1]
+func ReplaceArgs() (string, string) {
+	if os.Args[1] == "standard" || os.Args[1] == "shadow" || os.Args[1] == "thinkertoy" {
+		os.Args[1], os.Args[2] = os.Args[2], os.Args[1]
 	} else {
-		return os.Args[1],os.Args[2]
+		return os.Args[1], os.Args[2]
 	}
-	return os.Args[1],os.Args[2]
+	return os.Args[1], os.Args[2]
 }
 
 func IsAllNl(result string) bool {
